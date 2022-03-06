@@ -1,0 +1,9 @@
+*.aux
+*.idx
+*.log
+*.toc
+_minted-book/
+*.bbl
+*.blg
+*.pdf
+!book.pdf
