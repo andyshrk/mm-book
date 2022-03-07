@@ -5,5 +5,10 @@
 _minted-book/
 *.bbl
 *.blg
+*.bcf
+*.ilg
+*.ind
+*.out
+*.run.xml
 *.pdf
 !book.pdf
