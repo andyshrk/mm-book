@@ -1,0 +1,23 @@
+The Linux operating system (often referred to as the GNU/Linux operating system
+as it uses a great many components sourced from the GNU project) consists of a
+multitude of ordinary `userland' programs which provide basic functionality, but
+ultimately what makes Linux, Linux is the \emph{kernel}.\\
+
+The kernel is the part of the operating system which is `in charge' and in a
+sense is really the only thing your computer is running. It schedules programs,
+manages shared resources, handles errors, abstracts hardware and sits in the
+background as essentially the aether in which everything else resides.\\
+
+One of the shared resources an operating system must manage is its
+memory. Modern systems have gigabytes of Random Access Memory (RAM) which must
+be shared between processes, drivers and internal kernel data structures. The
+memory management `subsystem' (simply a subdivision of the kernel) is what
+does this, and what this book describes.\\
+
+The book is based on the most recent of the kernel at the start of writing --
+\textbf{Linux 5.17} -- and all code snippets and references are relative to this
+version. Additionally, while I try to keep things as architecture-independent as
+possible, in order to be able to be as specific as I can I will in some cases
+need to focus on one architecture in particular. For reasons of both ubiquity
+(on the desktop and server) and convenience, my focus will be the
+\textbf{x86-64} architecture.\\

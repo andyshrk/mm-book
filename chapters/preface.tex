@@ -1,0 +1,48 @@
+Linux is the most successful operating system of all time -- running seamlessly
+on billions of devices worldwide including almost \emph{all} of the
+internet's infrastructure, nearly all supercomputers and a dominant market share
+of mobile devices. Its success has been nothing short of astonishing.\\
+
+Underlying all of this are core subsystems which provide the foundation on top
+of which the rest of the kernel is built such as the scheduler, the virtual file
+system, networking and arguably the most fundamental of all - the memory
+manager.\\
+
+This book dives into the Linux kernel's memory management subsystem in
+substantial detail, describing its core algorithms, how memory is allocated and
+managed, how `memory pressure' is handled (when the system runs low on memory),
+how it interacts with I/O via the page cache and much else.\\
+
+This is not intended to be a practical how-to guide on diagnosing issues with
+memory, nor is it meant to be in any way exhaustive. No author, no matter their
+longevity, could dream of covering a subsystem in its entirety. It does however
+try to describe in as much detail as practically possible the \emph{core}
+fundamentals of how things work, the concepts, data structures and algorithms
+used to manage memory.\\
+
+Having said that, I have endeavoured to provide a considerable amount of
+practical information, with examples, references to procfs and sysfs data
+sources for diagnosis, a break down of dmesg output when the out of memory
+killer kicks in, knobs to twiddle to adjust memory management behaviour and much
+else which should hopefully render it a useful reference for practical use.\\
+
+While the book is not exhaustive, I have tried hard to describe as much as I
+practically can with references to the ultimate authority on how things work --
+no, not Linus, the kernel source code. Where insufficient detail is provided you
+can always refer back to this, the ultimate reference.\\
+
+The aim of this book is to help the reader understand how memory is managed in
+Linux in as much detail as possible and to provide a stepping-off point for
+further investigation. The aim of writing it was to do the same for me.\\
+
+This book is aimed at both those simply curious about how this stuff works (in
+finest tradition of hacker culture) and Linux professionals wishing to gain a
+deeper understanding of how their operating system handles memory.\\
+
+
+The fascination that drives my interest in this area is how simultaneously
+simple and incredibly complicated this part of the Linux kernel is. Something so
+seemingly straightforward hides beneath it a great deal of engineering effort
+replete with trade-offs and many, many moving parts. Much like mechanical
+watches I get a special thrill from knowing there is so much going on to provide
+something quite so fundamental.\\

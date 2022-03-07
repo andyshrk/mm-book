@@ -11,224 +11,89 @@
 \maketitle
 \tableofcontents
 \chapter{Preface}
-Linux is the most successful operating system of all time -- running seamlessly
-on billions of devices worldwide including almost \emph{all} of the
-internet's infrastructure, nearly all supercomputers and a dominant market share
-of mobile devices. Its success has been nothing short of astonishing.\\
 
-Underlying all of this are core subsystems which provide the foundation on top
-of which the rest of the kernel is built such as the scheduler, the virtual file
-system, networking and arguably the most fundamental of all - the memory
-manager.\\
-
-This book dives into the Linux kernel's memory management subsystem in
-substantial detail, describing its core algorithms, how memory is allocated and
-managed, how `memory pressure' is handled (when the system runs low on memory),
-how it interacts with I/O via the page cache and much else.\\
-
-This is not intended to be a practical how-to guide on diagnosing issues with
-memory, nor is it meant to be in any way exhaustive. No author, no matter their
-longevity, could dream of covering a subsystem in its entirety. It does however
-try to describe in as much detail as practically possible the \emph{core}
-fundamentals of how things work, the concepts, data structures and algorithms
-used to manage memory.\\
-
-Having said that, I have endeavoured to provide a considerable amount of
-practical information, with examples, references to procfs and sysfs data
-sources for diagnosis, a break down of dmesg output when the out of memory
-killer kicks in, knobs to twiddle to adjust memory management behaviour and much
-else which should hopefully render it a useful reference for practical use.\\
-
-While the book is not exhaustive, I have tried hard to describe as much as I
-practically can with references to the ultimate authority on how things work --
-no, not Linus, the kernel source code. Where insufficient detail is provided you
-can always refer back to this, the ultimate reference.\\
-
-The aim of this book is to help the reader understand how memory is managed in
-Linux in as much detail as possible and to provide a stepping-off point for
-further investigation. The aim of writing it was to do the same for me.\\
-
-This book is aimed at both those simply curious about how this stuff works (in
-finest tradition of hacker culture) and Linux professionals wishing to gain a
-deeper understanding of how their operating system handles memory.\\
-
-
-The fascination that drives my interest in this area is how simultaneously
-simple and incredibly complicated this part of the Linux kernel is. Something so
-seemingly straightforward hides beneath it a great deal of engineering effort
-replete with trade-offs and many, many moving parts. Much like mechanical
-watches I get a special thrill from knowing there is so much going on to provide
-something quite so fundamental.\\
+\input{chapters/preface.tex}
 
 \mainmatter
 \chapter{Introduction}
 
-The Linux operating system (often referred to as the GNU/Linux operating system
-as it uses a great many components sourced from the GNU project) consists of a
-multitude of ordinary `userland' programs which provide fundamental
-functionality, but ultimately what makes Linux, Linux is the \emph{kernel}.\\
-
-The kernel is the part of the operating system which is `in charge' and in one
-sense is really the only thing your computer is running. It schedules programs,
-manages shared resources, handles errors, abstracts hardware and sits in the
-background as essentially the aether in which everything else resides.\\
-
-One of the shared resources an operating system must manage is its
-memory. Modern systems have gigabytes of Random Access Memory (RAM) which must
-be shared between processes, drivers and internal kernel data structures. The
-memory management `subsystem' (simply a subdivision of the kernel) is what
-does this, and what this book describes.\\
-
-The book is based on the most recent of the kernel at the start of writing --
-\textbf{Linux 5.17} -- and all code snippets and references are relative to this
-version. Additionally, while I try to keep things as architecture-independent as
-possible, in order to be able to be as specific as I can I will in some cases
-need to focus on one architecture in particular. For reasons of both ubiquity
-(on the desktop and server) and convenience, my focus will be the
-\textbf{x86-64} architecture.\\
+\input{chapters/intro.tex}
 
 \chapter{Working with the kernel}
 
-TBD\\
-
-Basics on getting the kernel source code, getting qemu setup, where mm files
-live, etc. Maybe too basic?\\
+\input{chapters/working-with-kernel.tex}
 
 \chapter{Fundamentals}
 
-TBD\\
-
-Covers fundamentals of the MMU, page tables, virtual memory vs. physical memory,
-userland allocator vs. kernel memory allocation, demand paging, etc.\\
+\input{chapters/fundamentals.tex}
 
 \chapter{Allocators}
 
-TBD\\
-
-Covers basic design principles of an allocator with simple examples of a
-userland implementation and how this interacts with the operating system. `From
-malloc to mmap'.\\
+\input{chapters/allocators.tex}
 
 \chapter{Physical memory}
 
-TBD\\
-
-Covers memory discovery (e820), zones, NUMA nodes, most importantly the buddy
-allocator, memory order sizes (maybe reference how OOM can occur because larger
-order sizes aren't available), \mintinline{c}{struct page},
-\mintinline{c}{struct folio}, and whatever else is required to describe how the
-fundamental physical memory resource is allocated.\\
+\input{chapters/phys-mem.tex}
 
 \chapter{Virtual memory in the kernel}
 
-TBD\\
+\input{chapters/virt-mem-kernel.tex}
 
-Covers the process address space, the physical memory mapping, page fault
-handling, the slab allocator, \mintinline{c}{kmalloc()} and
-\mintinline{c}{kfree()} and whatever else is required to describe virtual memory
-in the kernel.\\
+\chapter{Virtual memory in user space}
 
-\chapter{Virtual memory in userspace}
-
-TBD\\
-
-Covers VMAs, CoW, fork, \textbf{mmap} and \textbf{brk} syscalls, and whatever
-else is required to describe virtual memory for userspace processes.\\
-
+\input{chapters/virt-mem-user-space.tex}
 
 \chapter{cgroups and containers}
 
-TBD\\
-
-Cover cgroups, the fundamental building block of containerisation as well as
-other means and approaches for constraining and controlling memory usage.\\
+\input{chapters/cgroups.tex}
 
 \chapter{The memory programming interface}
 
-TBD\\
-
-(Inspired by `the Linux programming interface')\\
-
-A practical how-to guide as to procfs interfaces, sysfs interfaces,
-\mintinline{c}{madvise()}, understanding the sysrq/oom dmesg output, perhaps
-eBPF, system knobs to twiddle -- a general practical course as to how to work
-with the linux memory manager.\\
+\input{chapters/memory-programming-interface.tex}
 
 \chapter{Shared memory}
 
-TBD\\
-
-A detailed, practical and specific overview of how to share memory in linux as
-this is such a useful interface and therefore worthy of its own chapter.\\
+\input{chapters/shared-mem.tex}
 
 \chapter{A process autopsy}
 
-Work through a process actually starting, doing some things and exiting and
-examining what is happening under the covers.\\
-
-TBD\\
+\input{chapters/process-autopsy.tex}
 
 \chapter{Moving memory}
 
-TBD\\
-
-Covers pinned pages vs. unpinned, why and how memory moves around. Make it clear
-that there's more going on here than you might expect.\\
+\input{chapters/moving-mem.tex}
 
 \chapter{Memory pressure and reclaim}
 
-TBD\\
-
-Covers memory pressure, compaction, swapping, measuring memory pressure,
-handling memory pressure, how it fits with demand paging design decisions in
-Linux.\\
-
+\input{chapters/mem-pressure.tex}
 
 \chapter{Memory-mapped I/O}
 
-TBD\\
-
-General coverage of memory-mapped file I/O, how it works, trade-offs. Leads in
-neatly to the page cache.
+\input{chapters/mem-map-io.tex}
 
 \chapter{The page cache}
 
-TBD\\
-
-Describes the Linux kernel file system caching mechanism i.e. the page
-cache. Links in again with swapping.\\
+\input{chapters/page-cache.tex}
 
 \chapter{Huge pages}
 
-TBD\\
-
-Covers huge pages both via hugetlb, transparent huge pages, tmpfs and shmem.\\
+\input{chapters/huge-pages.tex}
 
 \chapter{The Out-Of-Memory killer}
 
-TBD\\
-
-Covers how the OOM killer operates, how to change its behaviour, etc.\\
+\input{chapters/oom-killer.tex}
 
 \chapter{Device memory}
 
-TBD\\
-
-Covers memory-mapped device registers, PCI, \mintinline{c}{ioremap}, and other
-topics relevant to driver development.\\
+\input{chapters/device-mem.tex}
 
 \chapter{Early memory management}
 
-TBD\\
-
-Covers memblock and how the kernel bootstraps into its memory manager + early
-memory that is discarded.\\
+\input{chapters/early-mm.tex}
 
 \chapter{Userfaultfd}
 
-TBD\\
-
-Covers userland page fault handling via \textbf{userfaultfd}.\\
+\input{chapters/userfaultfd.tex}
 
 \backmatter
 \printindex
