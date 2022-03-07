@@ -1,15 +1,15 @@
 \section{Virtual memory}
 \index{virtual memory}
 
-In the good old days of the 8-bit microcomputers one program ran at a time and
-everybody could access any part of the memory. These were subdivided into ROM
-(Read-Only Memory), RAM (Random-Access Memory), video memory, device memory and
-various system-defined ranges (for example the
+In the good old days of the 8-bit microcomputers programs ran one at a time and
+each one could access any part of the memory. Memory ranges were subdivided into
+ROM (Read-Only Memory), RAM (Random-Access Memory), video memory, device memory
+and various system-defined ranges (for example the
 \href{https://worldofspectrum.org/ZXSpectrum128+3Manual/chapter8pt24.html}{Spectrum
   128} \autocite{spectrum128-manual:c8pt24}) and each program simply had to know
 where they could and could not write to.\\
 
-This poses problems -- even if you run one program at once a bug might result in
+This poses problems -- even if you run one program at a time a bug might result in
 you overwriting critical system state causing unexpected behaviour and most
 likely a crash, necessitating a system restart. If you run more than one program
 at once then you enter a world of pain -- each program will need to somehow be
@@ -18,9 +18,9 @@ simultaneously being able to trample all over the data of both the system and
 any other program. A single bug and you kill the system.\\
 
 What is termed \emph{fragmentation} is also a huge problem in this scenario --
-every block of memory allocated by the operating system must needs sit in the
-`gaps' left by all programs. If a program asks for more memory than a gap
-provides the request must either be refused.\\
+every block of memory allocated by the operating system must sit in the `gaps'
+left by all programs. If a program asks for more memory than a gap provides the
+request must be refused.\\
 
 As memory is not mediated by the operating system but accessed directly by
 programs a solution to this issue must necessarily be implemented in
