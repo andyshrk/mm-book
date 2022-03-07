@@ -1,8 +1,23 @@
 \documentclass[a4paper,oneside]{scrbook}
+
+% Packages.
+\usepackage{hyperref}
 \usepackage{makeidx}
 \usepackage{minted}
+\usepackage{url}
+\usepackage[backend=biber,style=numeric]{biblatex}
+
+% Configuration.
+\addbibresource{biblio.bib}
 \usemintedstyle{vs}
 \makeindex
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    pdftitle={The Linux Memory Manager},
+    }
+
+% Output title and contents.
 \begin{document}
 \title{The Linux Memory Manager}
 \author{Lorenzo Stoakes}
@@ -10,91 +25,79 @@
 \date{} % We don't want to output the date.
 \maketitle
 \tableofcontents
-\chapter{Preface}
 
+% CHAPTERS:
+
+% Front end of the book - preface, acknowledgements, declarations of
+% genius/imbecility etc.
+\chapter{Preface}
 \input{chapters/preface.tex}
 
+% Core chapters.
 \mainmatter
-\chapter{Introduction}
 
+\chapter{Introduction}
 \input{chapters/intro.tex}
 
 \chapter{Working with the kernel}
-
 \input{chapters/working-with-kernel.tex}
 
 \chapter{Fundamentals}
-
 \input{chapters/fundamentals.tex}
 
 \chapter{Allocators}
-
 \input{chapters/allocators.tex}
 
 \chapter{Physical memory}
-
 \input{chapters/phys-mem.tex}
 
 \chapter{Virtual memory in the kernel}
-
 \input{chapters/virt-mem-kernel.tex}
 
 \chapter{Virtual memory in user space}
-
 \input{chapters/virt-mem-user-space.tex}
 
 \chapter{cgroups and containers}
-
 \input{chapters/cgroups.tex}
 
 \chapter{The memory programming interface}
-
 \input{chapters/memory-programming-interface.tex}
 
 \chapter{Shared memory}
-
 \input{chapters/shared-mem.tex}
 
 \chapter{A process autopsy}
-
 \input{chapters/process-autopsy.tex}
 
 \chapter{Moving memory}
-
 \input{chapters/moving-mem.tex}
 
 \chapter{Memory pressure and reclaim}
-
 \input{chapters/mem-pressure.tex}
 
 \chapter{Memory-mapped I/O}
-
 \input{chapters/mem-map-io.tex}
 
 \chapter{The page cache}
-
 \input{chapters/page-cache.tex}
 
 \chapter{Huge pages}
-
 \input{chapters/huge-pages.tex}
 
 \chapter{The Out-Of-Memory killer}
-
 \input{chapters/oom-killer.tex}
 
 \chapter{Device memory}
-
 \input{chapters/device-mem.tex}
 
 \chapter{Early memory management}
-
 \input{chapters/early-mm.tex}
-
 \chapter{Userfaultfd}
-
 \input{chapters/userfaultfd.tex}
 
+% Back end of the book - bibliography, index.
 \backmatter
+\nocite{*}
+\printbibliography
 \printindex
 \end{document}
