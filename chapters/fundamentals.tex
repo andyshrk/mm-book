@@ -1,2 +1,20 @@
-Covers fundamentals of the MMU, page tables, virtual memory vs. physical memory,
-userland allocator vs. kernel memory allocation, demand paging, etc.\\
+\section{Virtual memory}
+\index{virtual memory}
+
+In the 'good old days' of the 8-bit microcomputers one program ran at a time and
+everybody could access any part of the memory. These were subdivided into ROM
+(Read-Only Memory), RAM (Random-Access Memory), video memory, device memory and
+various system-defined ranges (for example the
+\href{https://worldofspectrum.org/ZXSpectrum128+3Manual/chapter8pt24.html}{Spectrum
+  128} \autocite{spectrum128-manual:c8pt24})\\
+
+\section{Paging}
+
+Keeping a track of memory raises a practical issue -- if we need metadata to
+keep track of things such as whether a certain part of memory is allocated or
+not, then we can't keep track of things at a byte granularity or we'd end up in
+the absurd situation where each byte of memory requires (at least) a byte to
+describe it.\\
+
+We therefore have to divide memory up into blocks. These blocks are called
+\emph{pages}.
