@@ -1,0 +1,54 @@
+\begin{figure}[hbt!]
+  \centering
+  \begin{tikzpicture}[yscale=-1, node distance=0] % yscale=-1 puts origin at top-left.
+    \tikzset{every node/.style={line width= 0.5 pt}}
+    \pgfmathsetmacro\width{1.5}
+    \pgfmathsetmacro\height{4}
+    \pgfmathsetmacro\xseparation{0.5}
+    \pgfmathsetmacro\yseparation{0.75}
+    \pgfmathsetmacro\xoffset{\width + \xseparation}
+    \pgfmathsetmacro\entryheight{\yseparation / 1.5}
+
+    % Nest each so they all get offset equally.
+    % TODO: Can we eliminate some duplication here?
+    % TODO: Can we do something about this horrorshow of nesting?
+    \node (pgd) [draw, rectangle, minimum width=\width cm, minimum height=\height cm, label=PGD] at (0, 0) {};
+
+    \begin{scope}[xshift=\xoffset cm, yshift=\yseparation cm]
+      \node (p4d) [draw, rectangle, minimum width=\width cm, minimum height=\height cm, label=P4D] at (0, 0) {};
+
+      \begin{scope}[xshift=\xoffset cm, yshift=\yseparation cm]
+        \node (pud) [draw, rectangle, minimum width=\width cm, minimum height=\height cm, label=PUD] at (0, 0) {};
+
+        \begin{scope}[xshift=\xoffset cm, yshift=\yseparation cm]
+          \node (pmd) [draw, rectangle, minimum width=\width cm, minimum height=\height cm, label=PMD] at (0, 0) {};
+
+          \begin{scope}[xshift=\xoffset cm, yshift=\yseparation cm]
+            \node (pte) [draw, rectangle, minimum width=\width cm, minimum height=\height cm, label=PTE] at (0, 0) {};
+
+            \begin{scope}[xshift=\xoffset cm, yshift=\yseparation cm]
+              \node (data) [draw, rectangle, minimum width=\width cm, minimum height=\height cm, label=Data page] at (0, 0) {};
+            \end{scope}
+          \end{scope}
+        \end{scope}
+      \end{scope}
+    \end{scope}
+
+    % Entries.
+    \node (pgde) [draw, below=of pgd.north, rectangle, anchor=north, minimum width=\width cm, minimum height=\entryheight cm, yshift=-\entryheight cm, inner sep=0, outer sep=0] {};
+    \node (p4de) [draw, below=of p4d.north, rectangle, anchor=north, minimum width=\width cm, minimum height=\entryheight cm, yshift=-\entryheight cm, inner sep=0, outer sep=0] {};
+    \node (pude) [draw, below=of pud.north, rectangle, anchor=north, minimum width=\width cm, minimum height=\entryheight cm, yshift=-\entryheight cm, inner sep=0, outer sep=0] {};
+    \node (pmde) [draw, below=of pmd.north, rectangle, anchor=north, minimum width=\width cm, minimum height=\entryheight cm, yshift=-\entryheight cm, inner sep=0, outer sep=0] {};
+    \node (ptde) [draw, below=of pte.north, rectangle, anchor=north, minimum width=\width cm, minimum height=\entryheight cm, yshift=-\entryheight cm, inner sep=0, outer sep=0] {};
+
+    % Arrows.
+    \draw [-latex] (pgde.east) -- (p4d.west |- p4d.north);
+    \draw [-latex] (p4de.east) -- (pud.west |- pud.north);
+    \draw [-latex] (pude.east) -- (pmd.west |- pmd.north);
+    \draw [-latex] (pmde.east) -- (pte.west |- pte.north);
+    \draw [-latex] (ptde.east) -- (data.west |- data.north);
+
+  \end{tikzpicture}
+
+  \caption{Page table structure}
+\end{figure}
