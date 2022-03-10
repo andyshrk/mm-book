@@ -1,23 +1,48 @@
-The Linux operating system (often referred to as the GNU/Linux operating system
-as it uses a great many components sourced from the GNU project) consists of a
-multitude of ordinary `userland' programs which provide basic functionality, but
-ultimately what makes Linux, Linux is the \emph{kernel}.\\
+The key part of any operating system is the `kernel'. This is the privileged
+part of the code that runs on startup and sits in the background transparently
+providing the fundamental services which makes everything work.\\
 
-The kernel is the part of the operating system which is `in charge' and in a
-sense is really the only thing your computer is running. It schedules programs,
-manages shared resources, handles errors, abstracts hardware and sits in the
-background as essentially the aether in which everything else resides.\\
+The kernel consists of a number of subsystems which generally speaking provide
+two key things -- fair distribution of scarce resources and hardware
+abstraction. This book focuses on a key part of the former, memory management.\\
 
-One of the shared resources an operating system must manage is its
-memory. Modern systems have gigabytes of Random Access Memory (RAM) which must
-be shared between processes, drivers and internal kernel data structures. The
-memory management `subsystem' (simply a subdivision of the kernel) is what
-does this, and what this book describes.\\
+It could be argued that memory is the most fundamental resource a computer has
+-- programs both exist within it and utilise it to do be able to do anything at
+all. From the point of view of a standard application programmer this resource
+is both abundant and simple to use and access -- stack memory `just works' and
+heap memory is a \mintinline{c}{malloc()} (or equivalent) call away. As with
+much of the kernel, this simplicity belies the underlying complexity required
+for this to be so.\\
+
+We begin with a chapter covering the basics of obtaining the kernel, configuring
+it, compiling it and running it under the \href{https://www.qemu.org/}{qemu}
+emulator. Next we examine the fundamental principles underlying memory
+management on modern hardware which provides the foundations for the rest of the
+book.\\
+
+The next series of chapters examine memory allocators in general,
+how \emph{physical} memory is allocated within the kernel, how \emph{virtual}
+memory is mapped in both the kernel and userland and how cgroups play into this.\\
+
+After this I focus on more practical considerations -- the interface to memory
+management features and diagnostics both within the kernel, in userland and from
+the comman prompt. Then we examine how shared memory functions and how to use it
+effectively.\\
+
+The next series of chapters examine more advanced topics -- starting with an
+`autopsy' of a process alllocating memory - observing how different memory
+management operations function running through both userland and the kernel,
+moving to how and under what circumstances physical memory is moved around, what
+memory pressure is and how memory is reclaimed, how memory mapped I/O functions
+seguing into a description of the page cache. After this we examine how `huge'
+page sizes function, the Out of Memory (OOM) killer, memory interfaces in
+relation to device drivers, and finally an examination of memory management in
+early stages of the kernel.\\
 
 The book is based on the most recent of the kernel at the start of writing --
 \textbf{Linux 5.17} -- and all code snippets and references are relative to this
 version. Additionally, while I try to keep things as architecture-independent as
-possible, in order to be able to be as specific as I can I will in some cases
+possible, in order to be able to be as specific as I can be  I will in some cases
 need to focus on one architecture in particular. For reasons of both ubiquity
 (on the desktop and server) and convenience, my focus will be the
 \textbf{x86-64} architecture.\\
