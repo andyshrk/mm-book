@@ -9,10 +9,10 @@ and various system-defined ranges (for example the
   128} \autocite{spectrum128-manual:c8pt24}) and each program simply had to know
 where they could and could not write to.\\
 
-This poses problems -- even if you run one program at a time a bug might result in
+This posed problems -- even if you run one program at a time a bug might result in
 you overwriting critical system state causing unexpected behaviour and most
 likely a crash, necessitating a system restart. If you run more than one program
-at once then you enter a world of pain -- each program will need to somehow be
+at once then you are in real trouble -- each program will need to somehow be
 able to determine what parts of memory it can and cannot access, while
 simultaneously being able to trample all over the data of both the system and
 any other program. A single bug and you kill the system.\\

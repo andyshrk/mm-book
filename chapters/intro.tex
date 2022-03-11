@@ -1,6 +1,6 @@
-The key part of any operating system is the `kernel'. This is the privileged
-part of the code that runs on startup and sits in the background transparently
-providing the fundamental services which makes everything work.\\
+The key part of any operating system is the `kernel'. This is privileged code
+that runs on startup and sits in the background transparently providing the
+fundamental services which make everything work.\\
 
 The kernel consists of a number of subsystems which generally speaking provide
 two key things -- fair distribution of scarce resources and hardware
@@ -9,7 +9,7 @@ abstraction. This book focuses on a key part of the former, memory management.\\
 It could be argued that memory is the most fundamental resource a computer has
 -- programs both exist within it and utilise it to do be able to do anything at
 all. From the point of view of a standard application programmer this resource
-is both abundant and simple to use and access -- stack memory `just works' and
+is both abundant and simple to use -- stack memory `just works' and
 heap memory is a \mintinline{c}{malloc()} (or equivalent) call away. As with
 much of the kernel, this simplicity belies the underlying complexity required
 for this to be so.\\
@@ -42,7 +42,7 @@ early stages of the kernel.\\
 The book is based on the most recent of the kernel at the start of writing --
 \textbf{Linux 5.17} -- and all code snippets and references are relative to this
 version. Additionally, while I try to keep things as architecture-independent as
-possible, in order to be able to be as specific as I can be  I will in some cases
+possible, in order to be able to be as specific as I can be I will in some cases
 need to focus on one architecture in particular. For reasons of both ubiquity
 (on the desktop and server) and convenience, my focus will be the
 \textbf{x86-64} architecture.\\
