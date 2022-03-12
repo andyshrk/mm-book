@@ -26,9 +26,28 @@ As memory is not mediated by the operating system but accessed directly by
 programs a solution to this issue must necessarily be implemented in
 hardware. The solution is \emph{virtual memory} -- a mechanism where the
 operating system is able to instruct a \emph{Memory Management Unit (MMU)} to
-map `virtual' addresses to `physical' ones.\\
+map `virtual' addresses to `physical' ones (we'll discuss how this is actually
+implemented below).\\
 
-\section{Page tables}
+Another major benefit of a virtual memory system is the ability to store
+portions of programs on disk, i.e. \emph{paging} \index{paging}. This allows for
+the ability to run programs larger in size than available memory as well as
+allowing the system to free up memory to cache disk contents for quicker
+access.\\
+
+A physical address \index{physical address} indicates to the hardware where a
+particular byte in memory resides -- whether it is in RAM (a particular DIMM,
+bank, row, and column), or in a portion of memory assigned to system
+configuration
+(e.g. \href{https://en.wikipedia.org/wiki/Advanced_Configuration_and_Power_Interface}{ACPI} or
+\href{https://en.wikipedia.org/wiki/Advanced_Programmable_Interrupt_Controller}{APIC})
+, memory-mapped device registers (portions of a device's memory that are
+directly accessable by the system -- the system will route these memory accesses
+over the bus to the appropriate hardware, e.g. the
+\href{https://en.wikipedia.org/wiki/PCI_configuration_space}{PCI configuration
+  space} on a PC).
+
+\subsection{Page tables}
 \index{page tables}
 Keeping a track of memory raises a practical issue -- if we need metadata to
 keep track of things such as whether a certain part of memory is allocated or
@@ -36,8 +55,8 @@ not, then we can't keep track of things at a byte granularity or we'd end up in
 the absurd situation where each byte of memory requires (at least) a byte to
 describe it.\\
 
-We therefore have to divide memory up into blocks. These blocks are called
-\emph{pages}.\\
+To work around this, we divide memory up into finite chunks of a given size we
+term \emph{pages} \index{pages}.\\
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
 incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
