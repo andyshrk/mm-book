@@ -16,6 +16,8 @@
 
 * The wonders of fork as relates to demand paging.
 
+* Big discussion on the perils of overcommit.
+
 ## References
 
 * Stack pointer growing downwards - Stanley Mazor - The stack pointer was chosen
