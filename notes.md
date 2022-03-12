@@ -64,7 +64,6 @@ vmstat
 /proc/*/memory
 /proc/*/pagemap
 ```
-
 ## inspiration
 
 https://en.algorithmica.org/ and https://github.com/algorithmica-org/algorithmica
@@ -78,3 +77,36 @@ https://en.algorithmica.org/ and https://github.com/algorithmica-org/algorithmic
 ## Getting kernel
 
 * get cryptographically confirmed tarball - https://git.kernel.org/pub/scm/linux/kernel/git/mricon/korg-helpers.git/plain/get-verified-tarball - via https://twitter.com/monsieuricon/status/1501267710667333636
+
+## Links
+
+* On PA -> DIMM banks, rows, columns - https://lackingrhoticity.blogspot.com/2015/05/how-physical-addresses-map-to-rows-and-banks.html
+
+* Ancient ACM paper on 'folding' (i.e. paging) - https://dl.acm.org/doi/10.1145/363626.363629
+
+## e820 example output
+
+```
+[    0.000000] BIOS-provided physical RAM map:
+[    0.000000] BIOS-e820: [mem 0x0000000000000000-0x000000000005efff] usable
+[    0.000000] BIOS-e820: [mem 0x000000000005f000-0x000000000005ffff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000000060000-0x000000000009ffff] usable
+[    0.000000] BIOS-e820: [mem 0x00000000000a0000-0x00000000000fffff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000000100000-0x0000000034765fff] usable
+[    0.000000] BIOS-e820: [mem 0x0000000034766000-0x0000000034766fff] ACPI NVS
+[    0.000000] BIOS-e820: [mem 0x0000000034767000-0x0000000034767fff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000034768000-0x000000003d9f6fff] usable
+[    0.000000] BIOS-e820: [mem 0x000000003d9f7000-0x000000003de75fff] reserved
+[    0.000000] BIOS-e820: [mem 0x000000003de76000-0x000000003dff4fff] usable
+[    0.000000] BIOS-e820: [mem 0x000000003dff5000-0x000000003e3fdfff] ACPI NVS
+[    0.000000] BIOS-e820: [mem 0x000000003e3fe000-0x000000003ee4ffff] reserved
+[    0.000000] BIOS-e820: [mem 0x000000003ee50000-0x000000003eefefff] type 20
+[    0.000000] BIOS-e820: [mem 0x000000003eeff000-0x000000003eefffff] usable
+[    0.000000] BIOS-e820: [mem 0x000000003ef00000-0x000000003fffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000e0000000-0x00000000efffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000fe000000-0x00000000fe010fff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000fec00000-0x00000000fec00fff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000fee00000-0x00000000fee00fff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000ff000000-0x00000000ffffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000100000000-0x00000010bdffffff] usable
+```
