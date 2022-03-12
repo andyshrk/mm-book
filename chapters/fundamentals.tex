@@ -17,7 +17,8 @@ able to determine what parts of memory it can and cannot access, while
 simultaneously being able to trample all over the data of both the system and
 any other program. A single bug and you kill the system.\\
 
-What is termed \emph{fragmentation} is also a huge problem in this scenario --
+What is termed \index{fragmentation}\emph{fragmentation} -- the breaking up on
+memory into smaller fragments -- is also a huge problem in this scenario as
 every block of memory allocated by the operating system must sit in the `gaps'
 left by all programs. If a program asks for more memory than a gap provides the
 request must be refused.\\
@@ -70,7 +71,7 @@ control attributes such as marking it read-only, non-executable and much
 else. This allows the kernel to restrict how memory is used and implement
 features such as Copy On Write (covered in a later section in the book). Virtual
 addresses can also be mapped to the same physical memory, a key mechanism for
-allowing sharing of memory of memory-mapped files, dynamically linked libraries
+allowing sharing of memory of memory-mapped files, dynamically-linked libraries
 as well as clever inter-process communication (IPC) mechanisms.\\
 
 When a process tries to access memory that is not mapped, MMU-capable hardware
