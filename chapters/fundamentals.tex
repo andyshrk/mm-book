@@ -30,30 +30,83 @@ map `virtual' addresses to `physical' ones (we'll discuss how this is actually
 implemented below).\\
 
 Another major benefit of a virtual memory system is the ability to store
-portions of programs on disk, i.e. \emph{paging} \index{paging}. This allows for
+portions of programs on disk, i.e. \emph{paging}\index{paging}. This allows for
 the ability to run programs larger in size than available memory as well as
 allowing the system to free up memory to cache disk contents for quicker
 access.\\
 
-A physical address \index{physical address} indicates to the hardware where a
-particular byte in memory resides -- whether it is in RAM (a particular DIMM,
-bank, row, and column), or in a portion of memory assigned to system
-configuration
-(e.g. \href{https://en.wikipedia.org/wiki/Advanced_Configuration_and_Power_Interface}{ACPI} or
-\href{https://en.wikipedia.org/wiki/Advanced_Programmable_Interrupt_Controller}{APIC})
-, memory-mapped device registers (portions of a device's memory that are
-directly accessable by the system -- the system will route these memory accesses
-over the bus to the appropriate hardware, e.g. the
+A \emph{physical address} \index{physical address} tells the CPU where a
+particular byte resides -- whether it is in RAM (a particular DIMM, bank, row,
+and column), a portion of memory assigned to system configuration
+(e.g. \href{https://en.wikipedia.org/wiki/Advanced_Configuration_and_Power_Interface}{ACPI}
+or
+\href{https://en.wikipedia.org/wiki/Advanced_Programmable_Interrupt_Controller}{APIC}),
+memory-mapped device registers (e.g. the
 \href{https://en.wikipedia.org/wiki/PCI_configuration_space}{PCI configuration
-  space} on a PC).
+  space} on a PC), or some other architecture-specific location.\\
+
+From the kernel's point of view a physical address is simply an unsigned integer
+(typically the same size as a
+\href{https://en.wikipedia.org/wiki/Word_(computer_architecture)}{system
+  word}). In Linux this is represented as a
+\href{https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/include/linux/types.h?h=v5.17-rc7#n153}{phys\_addr\_t}.\\
+
+As with much else in memory management a physical address is an abstraction over
+far more complicated machinery, however from a kernel developer's point of view
+we can simply view it as a pointer to a physical location.\\
+
+Virtual addresses \index{virtual address} are also unsigned integers of the same
+size as physical addresses, however they are (largely) arbitrary values which
+can be mapped to any (page-aligned, see page tables section below) physical
+address by the kernel.\\
+
+An operating system can in theory implement virtual address mappings as it sees
+fit -- the hardware allows for virtual mappings to be changed on demand -- however
+Linux provides per-\emph{process} virtual mappings which are swapped out as the
+scheduler switches processes (but not threads which share memory mappings).\\
+
+Crucially the kernel is able to apply `flags' to virtual memory mappings which
+control attributes such as marking it read-only, non-executable and much
+else. This allows the kernel to restrict how memory is used and implement
+features such as Copy On Write (covered in a later section in the book). Virtual
+addresses can also be mapped to the same physical memory, a key mechanism for
+allowing sharing of memory of memory-mapped files, dynamically linked libraries
+as well as clever inter-process communication (IPC) mechanisms.\\
+
+When a process tries to access memory that is not mapped, MMU-capable hardware
+raises a \index{page fault} page fault processor exception. This can be caught
+by the operating system which can take any action it desires ranging from
+providing a mapping for the virtual address attempting to be accessed to
+segfaulting the process.\\
+
+This is incredibly powerful as it allows for on-demand behaviour, principally
+\href{https://en.wikipedia.org/wiki/Demand_paging}{demand paging} -- this is
+where a memory range is marked internally by the kernel as valid even though no
+physical memory is allocated yet.When the memory is \emph{demanded} then the
+kernel page fault handling logic can perform either the physical allocation for
+`anonymous memory' \index{anonymous memory} (i.e. memory in RAM not mapped to
+any file on disk), or if the virtual address refers to a memory-mapped file it
+can retrieve that from the disk, or if the memory has been paged out to disk
+then it can be retrieved, as well as many other mechanisms entirely customisable
+by the kernel.\\
+
+Combining customisable page fault handing with virtual memory flagging allows
+for clever mechanisms such as \index{Copy On Write} Copy On Write (COW) and
+\index{zero page} zero pages -- the former is a key part of Linux's ability to
+spin up new processes incredibly fast -- \index{fork}
+\href{https://en.wikipedia.org/wiki/Fork_(system_call)}{forking} a process need
+only set up new read-only page table mappings which can be copied only when a
+user tries to write to them. Zero pages (a single zeroed physical page, see
+below for a description of memory pages) can be mapped in to a faulting virtual
+address being \emph{read} from without needing to use any additional memory at
+all.\\
 
 \subsection{Page tables}
-\index{page tables}
-Keeping a track of memory raises a practical issue -- if we need metadata to
-keep track of things such as whether a certain part of memory is allocated or
-not, then we can't keep track of things at a byte granularity or we'd end up in
-the absurd situation where each byte of memory requires (at least) a byte to
-describe it.\\
+\index{page tables} Keeping a track of memory raises a practical issue -- if we
+need metadata to keep track of things such as whether a certain part of memory
+is allocated or not, then we can't keep track of things at a byte granularity or
+we'd end up in the absurd situation where each byte of memory requires (at
+least) a byte to describe it.\\
 
 To work around this, we divide memory up into finite chunks of a given size we
 term \emph{pages} \index{pages}.\\
