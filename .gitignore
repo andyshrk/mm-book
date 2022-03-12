@@ -10,5 +10,6 @@ _minted-book/
 *.ind
 *.out
 *.run.xml
+*.pyg
 *.pdf
 !book.pdf
