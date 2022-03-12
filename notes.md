@@ -10,6 +10,12 @@
 
 * Cover the whole linux swap controversy.
 
+* Cover changes to address issues around spectre, rowhammer, etc.
+
+* Address PID vs. TID given that threads share memory mappings...
+
+* The wonders of fork as relates to demand paging.
+
 ## References
 
 * Stack pointer growing downwards - Stanley Mazor - The stack pointer was chosen
