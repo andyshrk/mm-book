@@ -102,6 +102,42 @@ below for a description of memory pages) can be mapped in to a faulting virtual
 address being \emph{read} from without needing to use any additional memory at
 all.\\
 
+\subsection{Advantages of virtual memory}
+
+Summarising the advantages of virtual memory:-
+
+\begin{itemize}
+  \item Memory protection -- Processes cannot access memory they are not
+    permitted to such as unshared memory of other processes or kernel memory.
+  \item Virtual contiguity -- We are able to use physical memory (at a page
+    granularity, see page table section below) regardless of its fragmentation
+    (i.e. how broken into parts physical memory is) therefore permitting
+    efficient and simple memory allocation -- a process receiving a 1 GiB block
+    of memory doesn't need know or care that it's made from 1 part or 10,000.
+  \item Movability -- While typically a process cares only about \emph{virtual}
+    contiguity some, usually device-specific and in-kernel allocations, care
+    about physical contiguity too. This can indeed result in problematic
+    fragmentation and thus more \emph{memory pressure} (high memory demand and
+    less memory to service it) however this pressure can be relieved by moving
+    physical memory around -- the mappings are virtual so can simply be updated.
+  \item Demand paging -- As discussed above, with virtual mappings we are able
+    to defer actually `backing' (i.e. physically allocating, paging in or
+    mapping to a file depending on the mapping type) to the point where the
+    memory is actually used. This allows for far more efficient use of memory,
+    auto-expanding stack memory, paging memory to disk, fast forking and much
+    else.
+  \item Memory attributes -- By using virtual memory we are able to apply
+    `flags` to blocks of memory and mark them as read-only, non-executable and
+    much else. This allows for increased security and process stability -- a
+    process cannot do things it should not do even with its own memory.
+  \item Shared memory -- By having virtual memory mappings we are able to map
+    different virtual addresses to the same underlying physical address. This
+    allows for efficient dynamic linking of shared libraries, cached files to be
+    loaded once into memory and referenced by separate processes without
+    duplication (see the page cache section for more details) and clever
+    Inter-Process Communication (IPC) mechanisms between processes.
+\end{itemize}
+
 \subsection{Page tables}
 \index{page tables} Keeping a track of memory raises a practical issue -- if we
 need metadata to keep track of things such as whether a certain part of memory
