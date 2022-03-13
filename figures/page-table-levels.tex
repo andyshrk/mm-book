@@ -1,11 +1,11 @@
-\begin{figure}[hbt!]
+\begin{figure}[H]
   \centering
   \begin{tikzpicture}[yscale=-1, node distance=0] % yscale=-1 puts origin at top-left.
     \tikzset{every node/.style={line width= 0.5 pt}}
-    \pgfmathsetmacro\width{1.5}
-    \pgfmathsetmacro\height{4}
+    \pgfmathsetmacro\width{1}
+    \pgfmathsetmacro\height{3}
     \pgfmathsetmacro\xseparation{0.5}
-    \pgfmathsetmacro\yseparation{0.75}
+    \pgfmathsetmacro\yseparation{0.25}
     \pgfmathsetmacro\xoffset{\width + \xseparation}
     \pgfmathsetmacro\entryheight{\yseparation / 1.5}
 
@@ -27,7 +27,7 @@
             \node (pte) [draw, rectangle, minimum width=\width cm, minimum height=\height cm, label=PTE] at (0, 0) {};
 
             \begin{scope}[xshift=\xoffset cm, yshift=\yseparation cm]
-              \node (data) [draw, rectangle, minimum width=\width cm, minimum height=\height cm, label=Data page] at (0, 0) {};
+              \node (data) [draw, rectangle, minimum width=\width cm, minimum height=\height cm, label=Data] at (0, 0) {};
             \end{scope}
           \end{scope}
         \end{scope}
