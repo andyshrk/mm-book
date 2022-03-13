@@ -203,10 +203,10 @@ this table, we either note that the entry is marked empty and thus the address
 is invalid, or get the physical address to index into using the \emph{next 9 bit
 offset} contained in the virtual address.\\
 
-High-end recent x86-64 hardware is capable of addressing 57 bits (128
+Recent high-end x86-64 hardware is capable of addressing 57 bits (128
 petabytes!) of physical memory, despite having addresses 64 bits in length (most
-consumer hardware at the time of writing supports 48 bits). Since we need the final
-12 bits to determine the referenced byte in the data page itself ($4096 =
+consumer hardware at the time of writing supports 48 bits). Since we need the
+final 12 bits to determine the referenced byte in the data page itself ($4096 =
 2^{12}$) Therefore this arrangement requires $\frac{57 - 12}{9} = 5$ page table
 levels.\\
 
