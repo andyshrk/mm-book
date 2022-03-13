@@ -217,40 +217,37 @@ highest requirement of supported hardware the abstractions within the kernel
 have to assume 5 levels and then use clever tricks to collapse this into a
 smaller number of levels should the hardware support less.\\
 
-As a result kernel data structures specifically reference 5 levels:-
-
-\begin{itemize}
-\item Page Global Directory (PGD)
-\item Page 4th Directory (P4D)
-\item Page Upper Directory (PUD)
-\item Page Middle Directory (PMD)
-\item Page Table Entry directory (PTE)
-\end{itemize}
-
-Examining a 57-bit virtual address:-
-
-\begin{center}
-  $0xddd7314457cdea$ \\
-  $011011101 110101110 011000101 000100010 101111100 110111101010$ \\
-  \begin{tabular}{ c c c c c c }
-    $011011101$ & $110101110$ & $011000101$ & $000100010$ & $101111100$ & $110111101010$ \\
-    $221$ & $430$ & $197$ & $34$ & $380$ & $3,562$ \\
-    PGD Offset & P4D offset & PUD Offset & PMD Offset & PTE Offset & Data Page Offset \\
-  \end{tabular}
-\end{center}
-
-Each process will have a set PGD specified so this will be known by the hardware
-before decoding. It therefore reads from offset 221 in this table to obtain the
-physical address of the relevant P4D page table, reads from offset 430 in this
-table to obtain the physical address of the relevant PUD page table, reads from
-offset 197 in this table to obtain the physical address of the relevant PMD
-table, reads from offset 34 in this table to obtain the physical address of the
-relevant PTE table, reads from offset 380 in this table to obtain the data page
-address and finally offsets 3,562 bytes into the data page to find our final
-physical address.\\
-
-In diagrammatic form, the page table structures are as below, each entry in a
-page table pointing to the next before finally we determine the data page to
-finally offset into:-
+As a result the kernel abstracts 5 page table levels:-\\
 
 \input{figures/page-table-levels.tex}
+
+Each entry encodes the physical address for the table at the next level. The
+page table levels are:-\\
+\clearpage
+
+\begin{enumerate}
+\item PGD -- Page Global Directory
+\item P4D -- Page 4th level Directory
+\item PUD -- Page Upper Directory
+\item PMD -- Page Middle Directory
+\item PTE -- Page Table entry Directory
+\end{enumerate}
+
+For example, consider the virtual address 0xddd7314457cdea. We can extract
+offsets into each of these page tables thusly:-\\
+
+\input{figures/virtual-address-example.tex}
+
+Each process has a PGD placed into a register so the hardware knows how to
+decode virtual addresses (the CR3 register is used in x86-64) so this will be
+known by the hardware before decoding. Therefore the decoding process is:-
+
+\begin{enumerate}
+\item Read PGD address from hardware register
+\item Read PGD offset 221 to obtain physical address for P4D
+\item Read P4D offset 430 to obtain physical address for PUD
+\item Read PUD offset 197 to obtain physical address for PMD
+\item Read PMD offset 34 to obtain physical address for PTE
+\item Read PTE offset 380 to obtain physical address for the data page
+\item Offset by 3,562 bytes into the data page to obtain the final physical address
+\end{enumerate}
