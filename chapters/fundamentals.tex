@@ -240,14 +240,15 @@ offsets into each of these page tables thusly:-\\
 
 Each process has a PGD placed into a register so the hardware knows how to
 decode virtual addresses (the CR3 register is used in x86-64) so this will be
-known by the hardware before decoding. Therefore the decoding process is:-
+known by the hardware before decoding. Therefore the simplified hardware
+decoding process is:-
 
 \begin{enumerate}
-\item Read PGD address from hardware register
-\item Read PGD offset 221 to obtain physical address for P4D
-\item Read P4D offset 430 to obtain physical address for PUD
-\item Read PUD offset 197 to obtain physical address for PMD
-\item Read PMD offset 34 to obtain physical address for PTE
-\item Read PTE offset 380 to obtain physical address for the data page
-\item Offset by 3,562 bytes into the data page to obtain the final physical address
+\item Read PGD address from hardware register,
+\item Read PGD offset 221 to obtain physical address for P4D,
+\item Read P4D offset 430 to obtain physical address for PUD,
+\item Read PUD offset 197 to obtain physical address for PMD,
+\item Read PMD offset 34 to obtain physical address for PTE,
+\item Read PTE offset 380 to obtain physical address for the data page,
+\item Offset by 3,562 bytes into the data page to obtain the final physical address.
 \end{enumerate}
