@@ -1,4 +1,4 @@
-# Memory manager book
+# The Linux Memory manager
 
 This repo will contain my efforts towards writing a book describing the mm
 subsystem of the linux kernel.
