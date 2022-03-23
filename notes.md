@@ -86,12 +86,6 @@ https://en.algorithmica.org/ and https://github.com/algorithmica-org/algorithmic
 
 * get cryptographically confirmed tarball - https://git.kernel.org/pub/scm/linux/kernel/git/mricon/korg-helpers.git/plain/get-verified-tarball - via https://twitter.com/monsieuricon/status/1501267710667333636
 
-## Links
-
-* On PA -> DIMM banks, rows, columns - https://lackingrhoticity.blogspot.com/2015/05/how-physical-addresses-map-to-rows-and-banks.html
-
-* Ancient ACM paper on 'folding' (i.e. paging) - https://dl.acm.org/doi/10.1145/363626.363629
-
 ## e820 example output
 
 ```
@@ -118,3 +112,23 @@ https://en.algorithmica.org/ and https://github.com/algorithmica-org/algorithmic
 [    0.000000] BIOS-e820: [mem 0x00000000ff000000-0x00000000ffffffff] reserved
 [    0.000000] BIOS-e820: [mem 0x0000000100000000-0x00000010bdffffff] usable
 ```
+
+## Links
+
+* On PA -> DIMM banks, rows, columns - https://lackingrhoticity.blogspot.com/2015/05/how-physical-addresses-map-to-rows-and-banks.html
+* Ancient ACM paper on 'folding' (i.e. paging) - https://dl.acm.org/doi/10.1145/363626.363629
+* What a C programmer should known about memory - https://web.archive.org/web/20151123133211/http://marek.vavrusa.com/c/memory/2015/02/20/memory/
+
+## books
+
+https://www.amazon.co.uk/dp/1449344186/ Understanding & Using C Pointers: Core Techniques for Memory Management
+https://www.amazon.co.uk/dp/1292061421/ Modern Operating Systems
+https://www.amazon.co.uk/dp/1292214295/ Operating Systems: Internals and Design Principles
+https://www.amazon.co.uk/dp/0131453483/ Understanding the Virtual Memory Manager
+https://www.amazon.co.uk/dp/0672329468/ Linux Kernel Development
+https://www.amazon.co.uk/dp/0201896834/ AoCP: Vol 1: Fundamental Algorithms
+https://www.amazon.co.uk/dp/1593272200/ The Linux Programming Interface
+https://www.amazon.co.uk/dp/0201633388/ UNIX Systems for Modern Architectures
+https://www.amazon.co.uk/dp/198508659X/ Operating Systems: Three Easy Pieces
+https://www.amazon.co.uk/dp/0985673524/ Operating Systems: Principles and Practice
+https://www.amazon.co.uk/dp/1627056025/ Architectural and Operating System Support for Virtual Memory
